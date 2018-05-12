@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Grid, Row, Col } from "react-flexbox-grid";
 
+import "font-awesome/css/font-awesome.min.css";
+
 const ToolbarWrap = styled.div`
 	width: 50%;
 	padding-left: 6vw;
@@ -26,9 +28,9 @@ const ItemSelected = styled.div`
 `;
 
 const ToolbarItem = class extends Component {
-	constructor(props) {
-		super(props);
-	}
+	// constructor(props) {
+	// 	super(props);
+	// }
 
 	render() {
 		return (
@@ -40,13 +42,33 @@ const ToolbarItem = class extends Component {
 	}
 };
 
+const ToolbarMobile = styled.div`
+	color: white;
+	text-align: end;
+	padding-top: 30px;
+	padding-right: 30px;
+`;
+
 class Toolbar extends Component {
-	constructor(props) {
-		super(props);
-	}
+	// constructor(props) {
+	// 	super(props);
+	// }
 
 	state = {
-		itemSelected: "main"
+		itemSelected: "main",
+		width: window.innerWidth
+	};
+
+	componentWillMount() {
+		window.addEventListener("resize", this.handleWindowSizeChange);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.handleWindowSizeChange);
+	}
+
+	handleWindowSizeChange = () => {
+		this.setState({ width: window.innerWidth });
 	};
 
 	itemClicked = sel => {
@@ -54,11 +76,14 @@ class Toolbar extends Component {
 	};
 
 	render() {
-		return (
+		const { width } = this.state;
+		const isMobile = width <= 800;
+
+		return !isMobile ? (
 			<ToolbarWrap>
 				<Grid fluid>
 					<Row around="xs">
-						<Col lg={3}>
+						<Col lg={3} md={3}>
 							<ToolbarItem
 								selected={this.state.itemSelected === "main"}
 								onClick={() => {
@@ -68,7 +93,7 @@ class Toolbar extends Component {
 								Main
 							</ToolbarItem>
 						</Col>
-						<Col lg={3}>
+						<Col lg={3} md={3}>
 							<ToolbarItem
 								selected={
 									this.state.itemSelected === "bitacora"
@@ -77,7 +102,7 @@ class Toolbar extends Component {
 								Bitacora
 							</ToolbarItem>
 						</Col>
-						<Col lg={3}>
+						<Col lg={3} md={3}>
 							<ToolbarItem
 								selected={
 									this.state.itemSelected === "projects"
@@ -86,7 +111,7 @@ class Toolbar extends Component {
 								Projects
 							</ToolbarItem>
 						</Col>
-						<Col lg={3}>
+						<Col lg={3} md={3}>
 							<ToolbarItem
 								selected={
 									this.state.itemSelected === "research"
@@ -98,6 +123,10 @@ class Toolbar extends Component {
 					</Row>
 				</Grid>
 			</ToolbarWrap>
+		) : (
+			<ToolbarMobile>
+				<i className="fa fa-angle-double-left fa-lg" />
+			</ToolbarMobile>
 		);
 	}
 }
