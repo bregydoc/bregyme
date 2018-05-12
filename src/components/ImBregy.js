@@ -8,7 +8,7 @@ import RButton from "./RButton";
 
 const styles = StyleSheet.create({
 	buttons: {
-		marginTop: "20px",
+		marginTop: "25px",
 		width: "30%",
 		"@media only screen and (max-width: 600px)": {
 			width: "100%"
@@ -26,6 +26,7 @@ const Greeting = styled.div`
 `;
 
 const Description = styled.div`
+	margin-top: 15px;
 	font-family: "Lato", sans-serif;
 	font-weight: 300;
 	font-size: 3vh;
