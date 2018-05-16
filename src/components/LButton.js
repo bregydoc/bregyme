@@ -52,8 +52,7 @@ class LButton extends Component {
 		return (
 			<WrapButton
 				onClick={() => {
-					window.location.href =
-						"https://www.linkedin.com/in/bregy-malpartida-ramos-a8570a11b/";
+					window.location.href = "https://www.linkedin.com/in/bregy/";
 				}}
 			>
 				<ButtonContainer>

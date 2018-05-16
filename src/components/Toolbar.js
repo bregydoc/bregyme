@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Grid, Row, Col } from "react-flexbox-grid";
 
+import { Link } from "react-router-dom";
+
 import "font-awesome/css/font-awesome.min.css";
 
 const ToolbarWrap = styled.div`
@@ -34,7 +36,7 @@ const ToolbarItem = class extends Component {
 
 	render() {
 		return (
-			<div style={{ cursor: "pointer" }}>
+			<div style={{ cursor: "pointer" }} onClick={this.props.onClick}>
 				<ToolbarWItem>{this.props.children}</ToolbarWItem>
 				<ItemSelected selected={this.props.selected} />
 			</div>
@@ -43,10 +45,16 @@ const ToolbarItem = class extends Component {
 };
 
 const ToolbarMobile = styled.div`
-	color: white;
+	color: #1a1a1a;
 	text-align: end;
-	padding-top: 30px;
+	padding-top: 40px;
 	padding-right: 30px;
+	margin-bottom: -20px;
+	background-color: white;
+
+	-webkit-box-shadow: 0px 5px 34px -18px rgba(3, 0, 38, 1);
+	-moz-box-shadow: 0px 5px 34px -18px rgba(3, 0, 38, 1);
+	box-shadow: 0px 5px 34px -18px rgba(3, 0, 38, 1);
 `;
 
 class Toolbar extends Component {
@@ -73,6 +81,12 @@ class Toolbar extends Component {
 
 	itemClicked = sel => {
 		console.log(sel);
+		this.setState(prevState => {
+			return {
+				...prevState,
+				itemSelected: sel
+			};
+		});
 	};
 
 	render() {
@@ -86,9 +100,7 @@ class Toolbar extends Component {
 						<Col lg={3} md={3}>
 							<ToolbarItem
 								selected={this.state.itemSelected === "main"}
-								onClick={() => {
-									console.log("asdas");
-								}}
+								onClick={() => this.itemClicked("main")}
 							>
 								Main
 							</ToolbarItem>
@@ -98,6 +110,7 @@ class Toolbar extends Component {
 								selected={
 									this.state.itemSelected === "bitacora"
 								}
+								onClick={() => this.itemClicked("bitacora")}
 							>
 								Bitacora
 							</ToolbarItem>
@@ -107,18 +120,22 @@ class Toolbar extends Component {
 								selected={
 									this.state.itemSelected === "projects"
 								}
+								onClick={() => this.itemClicked("projects")}
 							>
 								Projects
 							</ToolbarItem>
 						</Col>
 						<Col lg={3} md={3}>
-							<ToolbarItem
-								selected={
-									this.state.itemSelected === "research"
-								}
-							>
-								Research
-							</ToolbarItem>
+							<Link to="/research">
+								<ToolbarItem
+									selected={
+										this.state.itemSelected === "research"
+									}
+									onClick={() => this.itemClicked("research")}
+								>
+									Research
+								</ToolbarItem>
+							</Link>
 						</Col>
 					</Row>
 				</Grid>
