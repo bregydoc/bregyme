@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import Main from "../pages/Main";
-import Research from "../pages/Research";
+import Main from './pages/Main';
+import Research from './pages/Research';
 
 class App extends Component {
 	render() {

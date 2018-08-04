@@ -1,47 +1,38 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import Background from "../components/Background";
-import Toolbar from "../components/Toolbar";
-import ImBregy from "../components/ImBregy";
-import ContactMe from "../components/ContactMe";
+import { BackgroundLandscape } from '../components/Background';
+import Hello from '../components/Hello';
+import Toolbar from '../components/Toolbar';
+import Dreamer from '../components/Dreamer';
+import Contact from '../components/Contact';
+import MediaTab from '../components/MediaTab';
+import TabHub from '../components/TabHub';
+import Button from '../components/Button';
 
-const CopyWrap = styled.div`
-	color: white;
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
-	font-family: "Raleway", sans-serif;
-	font-weight: 300;
-	@media only screen and (max-width: 700px) {
-		display: none;
-	}
+const SpacerButton = styled.div`
+	margin-top: 50px;
+	grid-column: 2/3;
+	grid-row: 4/5;
 `;
-
-const CopyR = props => {
-	return (
-		<CopyWrap>
-			Image by Matthias Schmidt<br />
-			<a
-				style={{ fontSize: "11px" }}
-				href={"https://www.artstation.com/steppenwolf"}
-			>
-				https://www.artstation.com/steppenwolf
-			</a>
-		</CopyWrap>
-	);
-};
-
 class MainPage extends Component {
 	render() {
 		return (
 			<div>
-				<Background>
+				<BackgroundLandscape>
 					<Toolbar />
-					<ImBregy />
-					<ContactMe />
-				</Background>
-				<CopyR />
+					<Hello />
+					<Dreamer />
+					<Contact />
+					<TabHub>
+						<MediaTab type={'github'} />
+						<MediaTab type={'linkedin'} />
+					</TabHub>
+
+					<SpacerButton>
+						<Button>SEE MY CURRENT PROJECT</Button>
+					</SpacerButton>
+				</BackgroundLandscape>
 			</div>
 		);
 	}

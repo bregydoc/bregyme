@@ -1,149 +1,99 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { Grid, Row, Col } from "react-flexbox-grid";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import { Link } from "react-router-dom";
+import Logo from './Logo';
 
-import "font-awesome/css/font-awesome.min.css";
+const Wrapper = styled.div`
+	display: flex;
+	height: 100%;
+	grid-column: 1/4;
+	grid-row: 1/2;
 
-const ToolbarWrap = styled.div`
-	width: 50%;
-	padding-left: 6vw;
-	padding-top: 8vh;
+	vertical-align: middle;
+	align-content: center;
 `;
 
-const ToolbarWItem = styled.div`
-	/* flex: ${props => (props.flex ? props.flex : 1)}; */
-	color: white;
-	font-family: "Lato", sans-serif;
-    text-transform: uppercase;
-    font-size: 12px;
+const Options = styled.div`
+	display: flex;
+	margin-left: auto;
+	font-family: 'Roboto Mono', monospace;
+	font-size: 18px;
+	color: #ffffff;
+	justify-content: space-between;
+	width: 50vw;
+	text-align: center;
+	align-content: center;
+
+	position: relative;
+	top: 35%;
+	margin-right: 20px;
 `;
 
-const ItemSelected = styled.div`
-	margin-top: 5px;
-	background-color: white;
+const Sub = styled.div`
 	height: 3px;
-	width: auto;
-	border-radius: 1px;
-	display: ${props => (props.selected ? "" : "none")};
+	width: 100%;
+	margin-top: 3px;
+	align-self: center;
+	justify-self: center;
+	background-color: #6bf1ff;
+	position: relative;
 `;
 
-const ToolbarItem = class extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// }
-
-	render() {
-		return (
-			<div style={{ cursor: "pointer" }} onClick={this.props.onClick}>
-				<ToolbarWItem>{this.props.children}</ToolbarWItem>
-				<ItemSelected selected={this.props.selected} />
-			</div>
-		);
+const OptionWrap = styled.div`
+	:hover {
+		cursor: pointer;
 	}
+`;
+
+const Option = props => {
+	return (
+		<OptionWrap onClick={props.onClick}>
+			{props.children}
+			{props.active ? <Sub /> : null}
+		</OptionWrap>
+	);
 };
 
-const ToolbarMobile = styled.div`
-	color: #1a1a1a;
-	text-align: end;
-	padding-top: 40px;
-	padding-right: 30px;
-	margin-bottom: -20px;
-	background-color: white;
-
-	-webkit-box-shadow: 0px 5px 34px -18px rgba(3, 0, 38, 1);
-	-moz-box-shadow: 0px 5px 34px -18px rgba(3, 0, 38, 1);
-	box-shadow: 0px 5px 34px -18px rgba(3, 0, 38, 1);
-`;
-
 class Toolbar extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// }
+	state = { mode: 0, selected: 0 };
 
-	state = {
-		itemSelected: "main",
-		width: window.innerWidth
-	};
-
-	componentWillMount() {
-		window.addEventListener("resize", this.handleWindowSizeChange);
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener("resize", this.handleWindowSizeChange);
-	}
-
-	handleWindowSizeChange = () => {
-		this.setState({ width: window.innerWidth });
-	};
-
-	itemClicked = sel => {
-		console.log(sel);
+	onSelectOption = option => {
 		this.setState(prevState => {
-			return {
-				...prevState,
-				itemSelected: sel
-			};
+			return { ...prevState, selected: option };
 		});
 	};
 
 	render() {
-		const { width } = this.state;
-		const isMobile = width <= 800;
-
-		return !isMobile ? (
-			<ToolbarWrap>
-				<Grid fluid>
-					<Row around="xs">
-						<Col lg={3} md={3}>
-							<ToolbarItem
-								selected={this.state.itemSelected === "main"}
-								onClick={() => this.itemClicked("main")}
-							>
-								Main
-							</ToolbarItem>
-						</Col>
-						<Col lg={3} md={3}>
-							<ToolbarItem
-								selected={
-									this.state.itemSelected === "bitacora"
-								}
-								onClick={() => this.itemClicked("bitacora")}
-							>
-								Bitacora
-							</ToolbarItem>
-						</Col>
-						<Col lg={3} md={3}>
-							<ToolbarItem
-								selected={
-									this.state.itemSelected === "projects"
-								}
-								onClick={() => this.itemClicked("projects")}
-							>
-								Projects
-							</ToolbarItem>
-						</Col>
-						<Col lg={3} md={3}>
-							<Link to="/research">
-								<ToolbarItem
-									selected={
-										this.state.itemSelected === "research"
-									}
-									onClick={() => this.itemClicked("research")}
-								>
-									Research
-								</ToolbarItem>
-							</Link>
-						</Col>
-					</Row>
-				</Grid>
-			</ToolbarWrap>
-		) : (
-			<ToolbarMobile>
-				<i className="fa fa-angle-double-left fa-lg" />
-			</ToolbarMobile>
+		return (
+			<Wrapper>
+				<Logo />
+				<Options>
+					<Option
+						active={this.state.selected === 0}
+						onClick={() => this.onSelectOption(0)}
+					>
+						HOME
+					</Option>
+					<Option
+						active={this.state.selected === 1}
+						onClick={() => this.onSelectOption(1)}
+					>
+						BITACORA
+					</Option>
+					<Option
+						active={this.state.selected === 2}
+						onClick={() => this.onSelectOption(2)}
+					>
+						PROJECTS
+					</Option>
+					<Option
+						active={this.state.selected === 3}
+						onClick={() => this.onSelectOption(3)}
+					>
+						RESEARCH
+					</Option>
+				</Options>
+			</Wrapper>
 		);
 	}
 }
