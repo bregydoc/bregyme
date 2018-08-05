@@ -20,7 +20,7 @@ const Content = styled.div`
 	font-family: 'Robot Mono', monospace;
 	font-weight: 400;
 	color: white;
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 1.5;
 	margin-top: 7.6px;
 `;
@@ -33,9 +33,10 @@ const Hello = props => {
 		<Wrapper>
 			<Title>Hi, I'm bregy</Title>
 			<Content>
-				Kogi Cosby sweater ethical squid irony{' '}
-				<HighLight>disrupt</HighLight>, organic tote bag gluten-free
-				XOXO wolf typewriter mixtape small batch.
+				I love the new technologies and develop it, I work with hardware
+				and software and my passion is the{' '}
+				<HighLight>Artificial Intelligence</HighLight>. Always I'm going
+				to try to improve all.
 			</Content>
 		</Wrapper>
 	);
