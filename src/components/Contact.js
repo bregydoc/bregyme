@@ -29,7 +29,7 @@ const Title = styled.div`
 	${props => {
 		if (props.isMobile) {
 			return css`
-				font-size: 4vw;
+				font-size: 4.1vw;
 			`;
 		}
 	}};
@@ -45,7 +45,7 @@ const Email = styled.div`
 	${props => {
 		if (props.isMobile) {
 			return css`
-				font-size: 3vw;
+				font-size: 3.1vw;
 				margin-top: 6px;
 			`;
 		}
@@ -62,7 +62,7 @@ const PhoneNumber = styled.div`
 	${props => {
 		if (props.isMobile) {
 			return css`
-				font-size: 3vw;
+				font-size: 3.1vw;
 				margin-top: 5px;
 			`;
 		}
