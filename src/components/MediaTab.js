@@ -14,12 +14,19 @@ const Tab = styled.div`
 	text-align: end;
 
 	margin-top: ${props => (props.type === 'github' ? '50px' : '6px')};
+
 	transition: 0.5s;
+
 	${props => {
 		if (props.hover) {
 			return css`
 				width: 80px;
 				cursor: pointer;
+			`;
+		}
+		if (props.isMobile && props.type === 'github') {
+			return css`
+				margin-top: 5px;
 			`;
 		}
 	}};
@@ -30,7 +37,7 @@ const tooltipAnimation = keyframes`
         opacity: 0;
     }
 
-    top {
+    to {
         opacity: 1;
     }
 `;
@@ -82,6 +89,7 @@ class MediaTab extends Component {
 					onMouseEnter={this.mouseEnter}
 					onMouseLeave={this.mouseLeave}
 					hover={this.state.hover}
+					isMobile={this.props.isMobile}
 				>
 					<Logo
 						src={

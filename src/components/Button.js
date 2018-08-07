@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 const animation = keyframes`
     0%{background-position:71% 0%}
@@ -29,6 +29,17 @@ const Base = styled.div`
 		cursor: pointer;
 		animation: ${animation} 5s ease infinite;
 	}
+
+	${props => {
+		if (props.isMobile) {
+			return css`
+				height: 40px;
+				padding-top: 3px;
+				padding-bottom: 3px;
+				max-width: 260px;
+			`;
+		}
+	}};
 `;
 
 const Child = styled.div`
@@ -43,6 +54,14 @@ const Child = styled.div`
 
 	top: 50%;
 	transform: translateY(-50%);
+
+	${props => {
+		if (props.isMobile) {
+			return css`
+				font-size: 14px;
+			`;
+		}
+	}};
 `;
 
 class Button extends Component {
@@ -51,8 +70,10 @@ class Button extends Component {
 	};
 	render() {
 		return (
-			<Base onMouseMove={this.mouseMove}>
-				<Child>{this.props.children}</Child>
+			<Base onMouseMove={this.mouseMove} isMobile={this.props.isMobile}>
+				<Child isMobile={this.props.isMobile}>
+					{this.props.children}
+				</Child>
 			</Base>
 		);
 	}

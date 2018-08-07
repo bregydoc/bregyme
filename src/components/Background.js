@@ -1,4 +1,4 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const BackgroundLandscape = styled.div`
@@ -13,10 +13,25 @@ const BackgroundLandscape = styled.div`
 `;
 
 const BackgroundMobile = styled.div`
+	/* height: calc(100vh - 56px); */
+	position: absolute;
 	height: 100vh;
 	width: 100vw;
 	background-color: #0a0029;
 
 	display: grid;
+	overflow: hidden;
+
+	grid-template-columns: 11.42% 77.16% 11.42%;
+	grid-template-rows: 12.56% 44vw 25vw 100%;
+	/* 38.35 */
 `;
-export { BackgroundLandscape, BackgroundMobile };
+
+const Background = props => {
+	if (!props.isMobile && !props.isTablet) {
+		return <BackgroundLandscape>{props.children}</BackgroundLandscape>;
+	}
+	return <BackgroundMobile>{props.children}</BackgroundMobile>;
+};
+
+export default Background;
