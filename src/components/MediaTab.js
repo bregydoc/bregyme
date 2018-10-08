@@ -65,6 +65,10 @@ const Logo = styled.img`
 	height: 38px;
 `;
 
+const Link = styled.a`
+	text-decoration: none;
+`;
+
 class MediaTab extends Component {
 	state = { hover: false };
 
@@ -82,7 +86,13 @@ class MediaTab extends Component {
 
 	render() {
 		return (
-			<div>
+			<Link
+				href={
+					this.props.type === 'github'
+						? 'https://github.com/bregydoc'
+						: 'https://www.linkedin.com/in/bregy-malpartida-ramos-a8570a11b/'
+				}
+			>
 				<Tab
 					color={this.props.type === 'github' ? '#EFEFEF' : '#91EAFF'}
 					type={this.props.type}
@@ -106,7 +116,7 @@ class MediaTab extends Component {
 						Account
 					</Tooltip>
 				) : null}
-			</div>
+			</Link>
 		);
 	}
 }

@@ -2,8 +2,17 @@ import React, { Component } from 'react';
 import MenuIcon from '../images/menu.png';
 import styled, { css } from 'styled-components';
 
+import { Link } from 'react-router-dom';
+
 const Wrap = styled.div`
 	margin-left: auto;
+	${props => {
+		if (props.isMobile) {
+			return css`
+				display: none;
+			`;
+		}
+	}};
 `;
 const Icon = styled.img`
 	width: auto;
@@ -52,7 +61,10 @@ const Sub = styled.div`
 `;
 
 const OptionWrap = styled.div`
+	text-decoration: none;
+	color: white;
 	:hover {
+		text-decoration: none;
 		cursor: pointer;
 	}
 `;
@@ -71,7 +83,7 @@ class MenuBar extends Component {
 		mode: 0,
 		selected: 0,
 		menuActive: false,
-		options: ['HOME', 'BITACORA', 'PROJECTS', 'RESEARCH']
+		options: ['home', 'bitacora', 'projects', 'research']
 	};
 
 	onSelectOption = option => {
@@ -94,7 +106,7 @@ class MenuBar extends Component {
 
 	render() {
 		return (
-			<Wrap>
+			<Wrap isMobile={this.props.isMobile}>
 				{this.props.isMobile ? (
 					<VisibleMenu
 						onClick={
@@ -114,13 +126,18 @@ class MenuBar extends Component {
 				>
 					{this.state.options.map((option, i) => {
 						return (
-							<Option
-								active={this.state.selected === i}
-								onClick={() => this.onSelectOption(i)}
-								key={i}
+							<Link
+								to={`/${option === 'home' ? '' : option}`}
+								style={{ textDecoration: 'none' }}
 							>
-								{this.state.options[i]}
-							</Option>
+								<Option
+									active={this.state.selected === i}
+									onClick={() => this.onSelectOption(i)}
+									key={i}
+								>
+									{option.toUpperCase()}
+								</Option>
+							</Link>
 						);
 					})}
 				</Options>

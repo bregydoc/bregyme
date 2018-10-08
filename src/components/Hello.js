@@ -53,6 +53,7 @@ const Content = styled.div`
 const HighLight = styled.span`
 	background-color: #5442fe;
 `;
+
 const Hello = props => {
 	return (
 		<Wrapper isMobile={props.isMobile}>
